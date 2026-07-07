@@ -1,5 +1,10 @@
 # RAG Document Pipeline
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Stack](https://img.shields.io/badge/Stack-ChromaDB%20%7C%20sentence--transformers%20%7C%20Ray-orange)
+
 A modular, production-ready Retrieval-Augmented Generation (RAG) pipeline for document Q&A.
 Built with ChromaDB, sentence-transformers, and a clean architecture that supports multiple
 document formats and LLM backends.

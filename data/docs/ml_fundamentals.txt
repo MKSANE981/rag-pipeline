@@ -1,0 +1,26 @@
+Machine Learning Fundamentals
+
+Supervised Learning
+In supervised learning, a model is trained on labeled examples (X, y) to learn a mapping f: X -> y. The training objective minimizes a loss function measuring the discrepancy between predictions f(X) and true labels y.
+
+Common loss functions:
+- Cross-entropy: used for classification, measures the divergence between predicted probability distributions and one-hot labels.
+- Mean Squared Error (MSE): used for regression, penalizes large errors quadratically.
+
+Bias-Variance Trade-off
+Model error can be decomposed into bias (systematic error from wrong assumptions) and variance (sensitivity to fluctuations in training data). High-capacity models (deep networks, unpruned trees) tend to overfit (high variance); linear models tend to underfit (high bias). Regularization (L1, L2, dropout) reduces variance at the cost of a slight increase in bias.
+
+Cross-Validation
+K-fold cross-validation partitions data into k folds, trains on k-1 folds and evaluates on the held-out fold, rotating until each fold has been used once as validation. This gives a more reliable estimate of generalization error than a single train/test split, especially with small datasets.
+
+Gradient Descent
+Parameters theta are updated iteratively in the direction of the negative gradient of the loss:
+theta = theta - lr * gradient(L(theta))
+
+Mini-batch gradient descent uses a random subset (batch) of training examples at each step, which is both computationally efficient and introduces beneficial stochasticity that helps escape local minima.
+
+Evaluation Metrics
+- Accuracy: fraction of correct predictions (misleading for imbalanced classes).
+- F1 score: harmonic mean of precision and recall, better for imbalanced datasets.
+- ROC-AUC: area under the receiver operating characteristic curve, measures ranking ability independent of threshold.
+- RMSE: root mean squared error for regression, has the same units as the target.

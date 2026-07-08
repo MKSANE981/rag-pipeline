@@ -13,6 +13,9 @@ Typical flow:
 """
 
 import argparse
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
 from ingestion import process_documents
 from vectorstore import VectorStore
 
@@ -58,7 +61,7 @@ def build_prompt(query: str, context: str) -> str:
     """
     return (
         "Use the context below to answer the question accurately and concisely.\n"
-        "If the answer is not in the context, say so — do not make things up.\n\n"
+        "If the answer is not in the context, say so - do not make things up.\n\n"
         f"Context:\n{context}\n\n"
         f"Question: {query}\n\n"
         "Answer:"

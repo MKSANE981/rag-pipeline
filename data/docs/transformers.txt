@@ -1,0 +1,20 @@
+Transformer Architecture
+
+The Transformer model was introduced in "Attention Is All You Need" (Vaswani et al., 2017). It replaced recurrent networks with a self-attention mechanism that allows all positions in a sequence to interact directly, eliminating the sequential bottleneck of RNNs.
+
+Self-Attention Mechanism
+For each token, self-attention computes a weighted sum of all other tokens. The weight between two tokens is proportional to the dot product of their query and key vectors, normalized by the square root of the embedding dimension. This is called scaled dot-product attention:
+
+Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) * V
+
+Multi-head attention runs this mechanism h times in parallel with different learned projections, allowing the model to attend to different aspects of the sequence simultaneously.
+
+BERT and DistilBERT
+BERT (Bidirectional Encoder Representations from Transformers) is a transformer encoder pre-trained on masked language modeling and next sentence prediction. It produces contextual embeddings where the same word can have different representations depending on context.
+
+DistilBERT is a distilled version of BERT: it is 40% smaller, 60% faster, while retaining 97% of BERT's performance. It is obtained by knowledge distillation — training a smaller student model to mimic the output distributions of the larger teacher.
+
+Fine-tuning
+Transformer models are pre-trained on large corpora and then fine-tuned on downstream tasks with much smaller datasets. This transfer learning approach is highly efficient: even with a few thousand labeled examples, fine-tuned transformers often outperform task-specific models trained from scratch on millions of examples.
+
+LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning method that injects trainable low-rank matrices into the frozen pre-trained weights. Instead of updating all parameters, LoRA only trains the rank decomposition matrices, reducing trainable parameters by 90-99% with minimal performance loss.

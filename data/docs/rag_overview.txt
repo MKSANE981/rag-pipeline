@@ -1,0 +1,27 @@
+Retrieval-Augmented Generation (RAG)
+
+RAG is a technique that augments a language model with a retrieval system. Instead of relying solely on the knowledge encoded in model weights, RAG retrieves relevant documents at inference time and includes them in the prompt context. This allows the model to answer questions about documents it has never seen during training.
+
+Why RAG?
+Large language models have a knowledge cutoff date and cannot access private or domain-specific documents. RAG solves both problems: by storing documents in a vector database and retrieving them on demand, the system can answer questions about any corpus without re-training or fine-tuning the LLM.
+
+Pipeline Components
+1. Ingestion: Documents are loaded, split into overlapping chunks, and embedded with a sentence encoder (e.g. all-MiniLM-L6-v2). The embeddings and metadata are stored in a vector database such as ChromaDB, FAISS, or Pinecone.
+
+2. Retrieval: At query time, the question is embedded with the same encoder. The top-k most similar chunks are retrieved from the vector store using approximate nearest-neighbor search (HNSW or IVF).
+
+3. Generation: The retrieved chunks are concatenated into a context block and prepended to the prompt. The LLM generates an answer grounded in the retrieved context.
+
+Chunking Strategy
+The chunking strategy significantly affects retrieval quality. Common approaches:
+- Fixed-size word chunks with overlap (simple, works well for uniform text)
+- Sentence-level chunks (better for Q&A, worse for long-form content)
+- Recursive character splitting (splits on paragraphs, then sentences, then words)
+
+Overlap between chunks (typically 10-15%) ensures that context at chunk boundaries is not lost.
+
+Embedding Models
+Sentence-transformers models map variable-length text to fixed-size dense vectors. all-MiniLM-L6-v2 (384 dimensions) is fast and compact. For multilingual corpora, paraphrase-multilingual-MiniLM-L12-v2 is a strong baseline.
+
+Vector Databases
+ChromaDB is an open-source embedded vector database designed for prototyping. For production, FAISS provides GPU-accelerated approximate search, and Pinecone offers a managed cloud service with filtering support.
